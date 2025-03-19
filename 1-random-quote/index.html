@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quote of the Day</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="img-cont">
-        <p id="quote"></p>
-        <p id="author"></p>
-    </div>
 
-    <button id="btn">New Quote</button>
-    <button id="copyBtn">Copy Quote</button>
-    <a href="" id="downloadBtn" target="_blank" download="quote.jpg">Download</a>
+<body>
+    <!-- Main Container -->
+    <div class="main-cont">
+        <h1>Quote of the Day</h1>
+
+        <!-- Image Container -->
+        <div class="img-cont">
+            <div>
+                <p id="quote"></p>
+                <p id="author"></p>
+            </div>
+        </div>
+
+        <!-- Button Container -->
+        <div class="btn-cont">
+            <button id="newBtn">New Quote</button>
+            <button id="copyBtn">Copy Quote</button>
+            <button id="downloadBtn">Download</button>
+            <button id="shareBtn">Share</button>
+        </div>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/dist/html2canvas-pro.min.js"></script>
 <script src="./script.js"></script>
+
 </html>
