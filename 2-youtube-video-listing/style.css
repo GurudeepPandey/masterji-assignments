@@ -1,0 +1,84 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #e7e4e4;
+}
+
+.header {
+    width: 100%;
+    background-color: rgb(240, 242, 243);
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+}
+
+.header div {
+    margin-top: 10px;
+}
+
+#searchInput {
+    width: clamp(200px, 30%, 600px);
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    background-color: #e7e4e4;
+    color: #3c3c3c;
+    border: 1px solid #3c3c3c;
+    box-shadow: 1px 2px 1px 0px #393737;
+    transition: all 0.3s ease-in-out;
+}
+
+.video-cont {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.card {
+    padding-bottom: 1em;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    background-color: #c5b8b8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 1px 2px 1px 0px #393737;
+    font-size: 0.9rem;
+    overflow: hidden;
+}
+
+.card a img {
+    max-width: 100%;
+    min-height: 250px;
+    height: auto;
+}
+.card div {
+    margin-left: 10px;
+}
+.card p {
+    margin-top: 6px;
+}
+
+.card .stats {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+    margin-top: 6px;
+}
