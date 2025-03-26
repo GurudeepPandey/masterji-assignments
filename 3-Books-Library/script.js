@@ -1,7 +1,8 @@
 
 const searchInput = document.querySelector("#searchBook")
 const sortBook = document.querySelector("#sortBook")
-const container = document.querySelector(".container")
+const view = document.querySelector("#view")
+const container = document.querySelector(".book-container")
 const prevBtn = document.querySelector("#prevBtn")
 const nextBtn = document.querySelector("#nextBtn")
 const pagenoDiv = document.querySelector("#pagenoDiv")
@@ -43,19 +44,41 @@ function displayBooks(books) {
     for (const book of books) {
         container.innerHTML += `
         <div class="card">
-            <div class="thumbnail">
+            <a class="thumbnail" href="${book.infoLink}" target="_blank">
                 <img src="${book.thumbnail}" alt="">
-            </div>
+            </a>
             <div class="info">
                 <h3>${book.title}</h3>
-                <p>${book.author}</p>
-                <p>${book.publisher}</p>
-                <p>${book.publishedDate}</p>
+                <p>Author: ${book.author}</p>
+                <p>Publisher: ${book.publisher}</p>
+                <p>Published Date: ${book.publishedDate}</p>
             </div>
         </div>
         `
     }
 }
+
+view.addEventListener("change", () => {
+    const card = document.querySelectorAll(".card")
+    if (view.value === "grid") {
+        container.classList.add("grid")
+        container.classList.remove("list")
+        card.forEach((card) => {
+            card.style.flexDirection = "column"
+            card.style.width = "280px"
+            card.firstElementChild.style.width = "100%"
+        })
+    }
+    else {
+        container.classList.remove("grid")
+        container.classList.add("list")
+        card.forEach((card) => {
+            card.style.flexDirection = "row"
+            card.style.width = "100%"
+            card.firstElementChild.style.width = "200px"
+        })
+    }
+})
 
 prevBtn.addEventListener("click", () => {
     if (pageno === 1) {

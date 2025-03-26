@@ -4,3 +4,153 @@
     padding: 0px;
     box-sizing: border-box;
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px 20px 10px 20px;
+    background-color: #43c145;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.header h1 {
+    font-family: cursive;
+    font-size: 2.4rem;
+}
+
+.header div {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#searchBook, #sortBook, #view {
+    padding: 7px 10px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.main-cont {
+    background-color: #7fe96f;
+}
+
+.book-container {
+    min-height: calc(100vh - 162px);
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    padding-top: 30px;
+    padding: 50px 10px 50px 10px;
+}
+
+.book-container .card {
+    width: 280px;
+    max-height: 400px;
+    background-color: #43c145;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px #036417;
+    text-decoration: none;
+    color: #0e0e0e;
+}
+
+.book-container .card .thumbnail {
+    width: 100%;
+    height: 300px;
+    border: 2px solid #049109;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.book-container .card .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.book-container .card .thumbnail img:hover {
+    transform: scale(1.1);
+}
+
+.book-container .card .info {
+    font-family: cursive;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.book-container .card .info h3 {
+    font-size: 1.3rem;
+}
+
+.pagination {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: #43c145;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    cursor: pointer;
+    background-color: #e7e4e4;
+    color: #3c3c3c;
+    border: 1px solid #3c3c3c;
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination #pagenoDiv {
+    padding: 3px 10px;
+    border: 1px solid #3c3c3c;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background-color: #fff;
+}
+
+.pagination button:hover {
+    background-color: #3c3c3c;
+    color: #e7e4e4;
+}
+
+.pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pagination button:disabled:hover {
+    background-color: #e7e4e4;
+    color: #3c3c3c;
+}
+
+#view {
+    cursor: pointer;
+}
+
+/* css properties that is add by javascript */
+.grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    justify-items: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

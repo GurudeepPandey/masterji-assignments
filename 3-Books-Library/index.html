@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books Library</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <input type="search" name="" id="searchBook">
-    <select name="" id="sortBook">
-        <option value="empty">Sort By</option>
-        <option value="a-z">Title (A-Z)</option>
-        <option value="z-a">Title (Z-A)</option>
-        <option value="new">New Books</option>
-        <option value="old">Old Books</option>
-    </select>
-    <div class="container">
-        <div class="card">
-            <div class="thumbnail">
-                <img src="" alt="">
-            </div>
-            <div class="info">
-                <h3></h3>
-                <p></p>
-                <p></p>
-                <p></p>
-            </div>
+    <div class="header">
+        <h1>Books Library</h1>
+        <div>
+            <input type="search" name="" id="searchBook" placeholder="Search Books title auther">
+            <select name="" id="sortBook">
+                <option value="empty">Sort By</option>
+                <option value="a-z">Title (A-Z)</option>
+                <option value="z-a">Title (Z-A)</option>
+                <option value="new">New Books</option>
+                <option value="old">Old Books</option>
+            </select>
+            <select name="" id="view">
+                <option value="grid">Grid</option>
+                <option value="list">List</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="main-cont">
+        <div class="book-container grid">
         </div>
     </div>
 
@@ -36,4 +39,5 @@
     </div>
 </body>
 <script src="./script.js"></script>
+
 </html>
