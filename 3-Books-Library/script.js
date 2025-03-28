@@ -1,4 +1,4 @@
-
+// collect all references
 const searchInput = document.querySelector("#searchBook")
 const sortBook = document.querySelector("#sortBook")
 const view = document.querySelector("#view")
@@ -8,13 +8,16 @@ const nextBtn = document.querySelector("#nextBtn")
 const pagenoDiv = document.querySelector("#pagenoDiv")
 let pageno = 1
 let bookStore = []
+let viewType = "grid"
 
+// function to fetch book details
 async function fetchBookDetails(pageno) {
     bookStore = []
     try {
         const response = await fetch(`https://api.freeapi.app/api/v1/public/books?page=${pageno}&limit=10`)
         const data = await response.json();
-        // console.log(data.data.data);
+
+        // extract specific book details
         for (const book of data.data.data) {
             bookStore.push({
                 "title": book.volumeInfo.title,
@@ -24,21 +27,14 @@ async function fetchBookDetails(pageno) {
                 "thumbnail": book.volumeInfo.imageLinks?.thumbnail || "./Images/default.png",
                 "infoLink": book.volumeInfo.infoLink
             })
-            // console.log(bookStore)
         }
         return bookStore;
-
     } catch (err) {
-        console.log(err);
+        console.log("Error during fetching book details: ", err);
     }
 }
 
-fetchBookDetails(pageno)
-    .then((data) => {
-        console.log(data)
-        displayBooks(data)
-    })
-
+// function to display books on DOM
 function displayBooks(books) {
     container.innerHTML = ""
     for (const book of books) {
@@ -56,11 +52,20 @@ function displayBooks(books) {
         </div>
         `
     }
+
+    // If user select grid view or list view
+    if (viewType === "grid") {
+        changeView("grid")
+    } else {
+        changeView("list")
+    }
 }
 
-view.addEventListener("change", () => {
+// function to change from list to grid or vice versa
+function changeView(view) {
     const card = document.querySelectorAll(".card")
-    if (view.value === "grid") {
+    if (view === "grid") {
+        viewType = "grid"
         container.classList.add("grid")
         container.classList.remove("list")
         card.forEach((card) => {
@@ -70,6 +75,7 @@ view.addEventListener("change", () => {
         })
     }
     else {
+        viewType = "list"
         container.classList.remove("grid")
         container.classList.add("list")
         card.forEach((card) => {
@@ -78,67 +84,31 @@ view.addEventListener("change", () => {
             card.firstElementChild.style.width = "200px"
         })
     }
-})
+}
 
-prevBtn.addEventListener("click", () => {
-    if (pageno === 1) {
-        prevBtn.disabled = true
-        return;
-    }
-    nextBtn.disabled = false
-    pageno--
-    pagenoDiv.innerText = pageno
+// function to work after page change
+function workAfterPageChange() {
     fetchBookDetails(pageno)
         .then((data) => {
             displayBooks(data)
         })
-    window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-    });
-    sortBook.value = "empty"
-    searchInput.value = ""
-    // handlePageChange("prev")
-})
-
-nextBtn.addEventListener("click", () => {
-    if (pageno === 21) {
-        nextBtn.disabled = true
-        return;
-    }
-    prevBtn.disabled = false
-    pageno++
     pagenoDiv.innerText = pageno
-    fetchBookDetails(pageno)
-        .then((data) => {
-            displayBooks(data)
-        })
     window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        top: 0,
+        behavior: "smooth"
     });
     sortBook.value = "empty"
     searchInput.value = ""
-    // handlePageChange("next")
-})
+}
 
-// function handlePageChange(btn) {
-//     if (btn === "prev" && pageno <= 1) {
-//         prevBtn.disabled = true
-//         return;
-//     }
-//     if(btn === "next" && pageno == 21) {
-//         nextBtn.disabled = true
-//         return
-//     }
-//     let nextpage = "prev" ? pageno-- : pageno++;
-//     pagenoDiv.innerText = nextpage
-//     fetchBookDetails(nextpage)
-//     .then( (data) => {
-//         displayBooks(data)
-//     })
-// }
+// calling functions and load books details when page loads
+fetchBookDetails(pageno)
+    .then((data) => {
+        console.log(data)
+        displayBooks(data)
+    })
 
+// When user search book
 searchInput.addEventListener("input", () => {
     const searchValue = searchInput.value.trim()
     const filterData = bookStore.filter((book) => book.title.toLowerCase().includes(searchValue) || book.author.toLowerCase().includes(searchValue))
@@ -148,6 +118,7 @@ searchInput.addEventListener("input", () => {
     }
 })
 
+// When user sort book
 sortBook.addEventListener("change", () => {
     const value = sortBook.value;
     if (value === 'a-z') {
@@ -161,3 +132,30 @@ sortBook.addEventListener("change", () => {
     }
     displayBooks(bookStore);
 });
+
+// When user change view
+view.addEventListener("change", () => {
+    changeView(view.value)
+})
+
+// when user click prev button
+prevBtn.addEventListener("click", () => {
+    if (pageno === 1) {
+        prevBtn.disabled = true
+        return;
+    }
+    nextBtn.disabled = false
+    pageno--
+    workAfterPageChange();
+})
+
+// when user click next button
+nextBtn.addEventListener("click", () => {
+    if (pageno === 21) {
+        nextBtn.disabled = true
+        return;
+    }
+    prevBtn.disabled = false
+    pageno++
+    workAfterPageChange()
+})
